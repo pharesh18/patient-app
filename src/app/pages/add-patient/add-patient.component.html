@@ -1,0 +1,58 @@
+<div class="add-patient">
+  <form [formGroup]="addPatientForm" (ngSubmit)="handleAddPatient()">
+    <h1 class="title">Add New Patient</h1>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>FirstName</mat-label>
+      <input type="text" matInput
+        placeholder="Enter your firstname" formControlName="first_name"
+        required />
+      @if (addPatientForm.get('first_name')?.hasError('required')) {
+      <mat-error>FirstName is required</mat-error>
+      }@else if(addPatientForm.get('first_name')?.hasError('pattern')){
+      <mat-error>FirstName accepts alphabets only</mat-error>
+      }@else if(addPatientForm.get('first_name')?.hasError('minlength')){
+      <mat-error>FirstName must be at least 2 characters long</mat-error>
+      }@else if(addPatientForm.get('first_name')?.hasError('maxlength')){
+      <mat-error>FirstName can not be more than 30 characters long</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>LastName</mat-label>
+      <input type="text" matInput
+        placeholder="Enter your lastname" formControlName="last_name" />
+      @if(addPatientForm.get('last_name')?.hasError('pattern')){
+      <mat-error>LastName accepts alphabets and ' only</mat-error>
+      }@else if(addPatientForm.get('last_name')?.hasError('minlength')){
+      <mat-error>LastName must be at least 2 characters long</mat-error>
+      }@else if(addPatientForm.get('last_name')?.hasError('maxlength')){
+      <mat-error>LastName can not be more than 30 characters long</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Mobile Number</mat-label>
+      <input type="number" matInput
+        placeholder="Enter your mobile number" formControlName="mobile"
+        required />
+      @if (addPatientForm.get('mobile')?.hasError('required')) {
+      <mat-error>Mobile Number is required</mat-error>
+      }@else if(addPatientForm.get('mobile')?.hasError('pattern')){
+      <mat-error>Please Enter Valid Mobile Number</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Zipcode</mat-label>
+      <input type="number" matInput
+        placeholder="Enter your zipcode" formControlName="zipcode" />
+      @if(addPatientForm.get('zipcode')?.hasError('pattern')){
+      <mat-error>Please Enter Valid Zipcode</mat-error>
+      }
+    </mat-form-field>
+
+    <button type="submit" [disabled]="addPatientForm.invalid"
+      class="btn-login" mat-flat-button
+      color="primary">ADD</button>
+  </form>
+</div>

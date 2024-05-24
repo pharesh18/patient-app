@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav [mode]="'side'" [opened]="openedSidebar">
+    <mat-list>
+      <mat-list-item>Dashboard</mat-list-item>
+      <mat-list-item>About</mat-list-item>
+      <mat-list-item>Logout</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

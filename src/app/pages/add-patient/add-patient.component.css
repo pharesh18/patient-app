@@ -1,6 +1,6 @@
-.login {
+.add-patient {
   min-height: 100vh;
-  padding-top: 10%;
+  padding-top: 5%;
 }
 
 form {
@@ -16,8 +16,6 @@ form {
   text-align: center;
   margin-bottom: 30px;
   color: rgb(63, 81, 181);
-  /* font-weight: 500;
-  font-size: 28px; */
 }
 
 .form-field {

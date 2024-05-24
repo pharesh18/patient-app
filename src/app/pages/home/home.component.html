@@ -1,4 +1,27 @@
 <div class="home">
-  <app-login />
-  <!-- <h1>fjdkfjdk</h1> -->
+  <div class="main-content">
+    <div class="add-patient-btn">
+      <button mat-flat-button color="primary" routerLink="add-patient">Add New
+        Patient</button>
+    </div>
+    <div class="list-patients">
+      <!-- @for (item of arr; track $index) { -->
+      <mat-card class="patient-card">
+        <mat-card-header>
+          <mat-card-title>{{patientData?.firstname + ' ' +
+            patientData?.lastname
+            }}</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <h3>Zipcode : 232323</h3>
+          <h3>Mobile Number : 9876899087</h3>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary"><a>Show Details</a></button>
+        </mat-card-actions>
+      </mat-card>
+      <!-- } -->
+    </div>
+  </div>
 </div>
