@@ -2,26 +2,25 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-## Development server
+# Steps to follow to run the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Clone the project in your local machine.
+2. Open the terminal and go in the project directory.
+3. run the command "npm i" to install all the libraries used in the project.
+4. Go to the project folder > rsc > app > services > patient.service.ts file and add API_KEY and BASE_URL.
+5. run the project main folder (here, patient-app) and run the "ng serve" command from the terminal to run the application.
+6. Use "haresh@gmail.com" as email and "123456" as a password for login.
 
-## Code scaffolding
+Screensots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Login
+![Uploading Screenshot 2024-05-27 143736.png…]()
 
-## Build
+2. Dashboard
+![Screenshot 2024-05-27 144140](https://github.com/pharesh18/patient-app/assets/100257602/9c4a64b8-2ad0-4be5-b26d-5bc844467e01)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. Add Patient
+![Screenshot 2024-05-27 144223](https://github.com/pharesh18/patient-app/assets/100257602/d5698afa-d351-4395-ae16-2cc78602ad32)
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. After Adding patient
+![Uploading Screenshot 2024-05-27 144234.png…]()
