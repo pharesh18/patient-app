@@ -56,6 +56,8 @@ export class HomeComponent {
           //   this.loading = false;
           // }, 5000);     // Uncomment this code and comment above line to see loader working
         });
+    } else {
+      this.loading = false;
     }
   }
 }

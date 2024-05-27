@@ -71,6 +71,10 @@ export class AddPatientComponent {
 
       this.patientSerive.addPatient(body).subscribe((result: any) => {
         if (result?.data) {
+          localStorage.setItem(
+            'patientData',
+            JSON.stringify({ patient_id: result?.data.patient_id })
+          );
           this.router.navigate(['/']);
           this.toast.success({
             detail: 'SUCCESS',
