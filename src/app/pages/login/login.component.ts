@@ -23,14 +23,23 @@ import { NgToastService } from 'ng-angular-popup';
 export class LoginComponent {
   hide = true;
 
-  constructor(private router: Router, private toast: NgToastService) { }
+  constructor(private router: Router, private toast: NgToastService) {}
 
-  clickEvent(event: MouseEvent) {
+  /**
+   * @purpose Toggle password show or hide on click of the button
+   * @input Event of the input field
+   * @return void
+   */
+  showHidePassword(event: MouseEvent) {
     this.hide = !this.hide;
     event.stopPropagation();
   }
 
   fb = inject(FormBuilder);
+
+  /**
+   * @purpose - Validate all the login form fields
+   */
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -43,7 +52,7 @@ export class LoginComponent {
   handleLogin(): void {
     const { email, password } = this.loginForm?.value;
     if (email === 'haresh@gmail.com' && password === '123456') {
-      localStorage.setItem("userData", JSON.stringify({ email, password }));
+      localStorage.setItem('userData', JSON.stringify({ email, password }));
       this.router.navigate(['/']);
       this.toast.success({
         detail: 'SUCCESS',
@@ -52,13 +61,11 @@ export class LoginComponent {
       });
     } else {
       this.toast.error({
-        detail: 'ERROR',
+        detail: 'ALERT',
         summary: 'Wrong Email or Password',
         duration: 3000,
       });
       console.log('error');
     }
-
-    console.log(email, password);
   }
 }

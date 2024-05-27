@@ -1,28 +1,44 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-patient-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './patient-details.component.html',
-  styleUrl: './patient-details.component.css'
+  styleUrl: './patient-details.component.css',
 })
 export class PatientDetailsComponent {
   patientData: any;
-  constructor(private route: ActivatedRoute, private patientService: PatientService) { }
+  loading: boolean = true;
+  constructor(
+    private route: ActivatedRoute,
+    private patientService: PatientService
+  ) {}
+
   ngOnInit(): void {
-    let parent_id = this.route.snapshot.paramMap.get("id");
-    parent_id && this.patientService.getPatientById(parent_id).subscribe((result: any) => {
-      if (result?.data && result?.data.length > 0) {
-        this.patientData = {
-          ...result.data[0],
-          created_date: result?.datetime?.split(" ")[0],
-        };
-      }
-      console.log(this.patientData);
-    });
+    this.getData();
+  }
+
+  /**
+   * @purpose Get single patient data from database
+   * @input None
+   * @return void
+   */
+  getData() {
+    let parent_id = this.route.snapshot.paramMap.get('id'); // get id from the url
+    parent_id &&
+      this.patientService.getPatientById(parent_id).subscribe((result: any) => {
+        if (result?.data && result?.data.length > 0) {
+          this.patientData = {
+            ...result.data[0],
+            created_date: result?.datetime?.split(' ')[0],
+          };
+        }
+        this.loading = false;
+      });
   }
 }

@@ -26,18 +26,21 @@ export class AddPatientComponent {
     private router: Router,
     private toast: NgToastService,
     private patientSerive: PatientService
-  ) { }
+  ) {}
 
   fb = inject(FormBuilder);
 
+  /**
+   * @purpose Validate all the form fields
+   */
   addPatientForm = this.fb.group({
     first_name: [
       '',
       [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z]+$/),
-        Validators.minLength(2),
-        Validators.maxLength(30),
+        Validators.required, // required field
+        Validators.pattern(/^[a-zA-Z]+$/), // inputed value must be in this format
+        Validators.minLength(2), // minimum length of input
+        Validators.maxLength(30), // maximum length of input
       ],
     ],
     last_name: [
@@ -52,18 +55,22 @@ export class AddPatientComponent {
     zipcode: ['', [Validators.pattern(/^\d{6}$/)]], // accepting here 6 digit zipcode only
   });
 
+  /**
+   * @purpose - Add patient to the database
+   * @input - None
+   * @return - void
+   */
   handleAddPatient(): void {
     if (this.addPatientForm.valid) {
       const body = {
-        first_name: (this.addPatientForm.value.first_name!)?.trim(),
-        last_name: (this.addPatientForm.value.last_name)?.trim(),
-        mobile: String((this.addPatientForm.value.mobile!))?.trim(),
-        zipcode: String((this.addPatientForm.value.zipcode))?.trim(),
+        first_name: this.addPatientForm.value.first_name!?.trim(),
+        last_name: this.addPatientForm.value.last_name?.trim(),
+        mobile: String(this.addPatientForm.value.mobile!)?.trim(),
+        zipcode: String(this.addPatientForm.value.zipcode)?.trim(),
       };
 
       this.patientSerive.addPatient(body).subscribe((result: any) => {
         if (result?.data) {
-          localStorage.setItem("patientData", JSON.stringify({ patient_id: result.data?.patient_id }))
           this.router.navigate(['/']);
           this.toast.success({
             detail: 'SUCCESS',
@@ -77,7 +84,6 @@ export class AddPatientComponent {
             duration: 3000,
           });
         }
-        console.log(result);
       });
     }
   }

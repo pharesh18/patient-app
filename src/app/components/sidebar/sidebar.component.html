@@ -1,8 +1,11 @@
 <mat-sidenav-container>
   <mat-sidenav [mode]="'side'" [opened]="openedSidebar">
     <mat-list>
-      <mat-list-item><a routerLink="/" class="nav-link">Dashboard</a></mat-list-item>
-      <mat-list-item><a routerLink="/" class="nav-link">About</a></mat-list-item>
+      <mat-list-item><a routerLink="/"
+          class="nav-link"><mat-icon>dashboard</mat-icon>Dashboard</a></mat-list-item>
+      <mat-list-item><a (click)="handleLogout()"
+          class="nav-link"><mat-icon
+            style="rotate: 180deg;">logout</mat-icon>Logout</a></mat-list-item>
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>

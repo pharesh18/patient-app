@@ -1,5 +1,5 @@
 mat-sidenav-container {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 65px - 40px);
 }
 
 mat-sidenav-content {
@@ -14,7 +14,6 @@ mat-sidenav {
 mat-list-item {
   width: 100%;
   padding: 0 10px;
-  margin-bottom: 1px;
 }
 
 .nav-link {
@@ -22,6 +21,14 @@ mat-list-item {
   color: #fff;
   font-size: 18px;
   font-weight: 400;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link mat-icon {
+  margin-right: 10px;
 }
 
 mat-list-item:hover {

@@ -2,9 +2,9 @@
   <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
     <h1 class="title">Login</h1>
     <mat-form-field class="form-field" appearance="fill">
-      <mat-label>Enter your email</mat-label>
+      <mat-label>Email</mat-label>
       <input type="email" matInput
-        placeholder="Email" formControlName="email"
+        placeholder="Enter your email" formControlName="email"
         required />
       @if (loginForm.get('email')?.hasError('required')) {
       <mat-error>Email is required</mat-error>
@@ -14,9 +14,9 @@
     </mat-form-field>
 
     <mat-form-field class="form-field">
-      <mat-label>Enter your password</mat-label>
+      <mat-label>Password</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'"
-        formControlName="password" required>
+        formControlName="password" placeholder="Enter your password" required>
       @if (loginForm.get('password')?.hasError('required')) {
       <mat-error>Password is required</mat-error>
       }@else if(loginForm.get('password')?.hasError('minlength')){
@@ -26,7 +26,7 @@
       }
       <button type="button" class="btn-password"
         matSuffix
-        (click)="clickEvent($event)">
+        (click)="showHidePassword($event)">
         <mat-icon class="password-icon">{{hide ? 'visibility_off' :
           'visibility'}}</mat-icon>
       </button>
