@@ -5,16 +5,18 @@ import { IPatient } from '../types/patientTypes';
 // CONFIDENTIAL VARIABLES ARE CONFIGURED HERE
 const BASE_URL = '';
 const API_KEY = '';
+// hgWpDjjX4b9GMlEXs619zA==
+// 3ufoiqUIhZgJ7ywTpvfi3Q==
 
 @Injectable({
   providedIn: 'root',
 })
 export class PatientService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getPatientById(body: { patient_id: string }) {
+  getPatientById(patient_id: string) {
     return this.http.post(`${BASE_URL}/patient/patients/view`, {
-      ...body,
+      patient_id,
       apikey: API_KEY,
     });
   }

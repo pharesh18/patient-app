@@ -26,7 +26,7 @@ export class AddPatientComponent {
     private router: Router,
     private toast: NgToastService,
     private patientSerive: PatientService
-  ) {}
+  ) { }
 
   fb = inject(FormBuilder);
 
@@ -55,14 +55,15 @@ export class AddPatientComponent {
   handleAddPatient(): void {
     if (this.addPatientForm.valid) {
       const body = {
-        first_name: this.addPatientForm.value.first_name!,
-        last_name: this.addPatientForm.value.last_name,
-        mobile: String(this.addPatientForm.value.mobile!),
-        zipcode: String(this.addPatientForm.value.zipcode),
+        first_name: (this.addPatientForm.value.first_name!)?.trim(),
+        last_name: (this.addPatientForm.value.last_name)?.trim(),
+        mobile: String((this.addPatientForm.value.mobile!))?.trim(),
+        zipcode: String((this.addPatientForm.value.zipcode))?.trim(),
       };
 
       this.patientSerive.addPatient(body).subscribe((result: any) => {
-        if (result.data) {
+        if (result?.data) {
+          localStorage.setItem("patientData", JSON.stringify({ patient_id: result.data?.patient_id }))
           this.router.navigate(['/']);
           this.toast.success({
             detail: 'SUCCESS',

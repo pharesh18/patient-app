@@ -23,7 +23,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class LoginComponent {
   hide = true;
 
-  constructor(private router: Router, private toast: NgToastService) {}
+  constructor(private router: Router, private toast: NgToastService) { }
 
   clickEvent(event: MouseEvent) {
     this.hide = !this.hide;
@@ -43,6 +43,7 @@ export class LoginComponent {
   handleLogin(): void {
     const { email, password } = this.loginForm?.value;
     if (email === 'haresh@gmail.com' && password === '123456') {
+      localStorage.setItem("userData", JSON.stringify({ email, password }));
       this.router.navigate(['/']);
       this.toast.success({
         detail: 'SUCCESS',

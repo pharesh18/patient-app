@@ -4,24 +4,30 @@
       <button mat-flat-button color="primary" routerLink="add-patient">Add New
         Patient</button>
     </div>
+    @if(patientData){
     <div class="list-patients">
       <!-- @for (item of arr; track $index) { -->
       <mat-card class="patient-card">
         <mat-card-header>
-          <mat-card-title>{{patientData?.firstname + ' ' +
+          <mat-card-title style="margin-bottom: 10px;">{{patientData?.firstname + ' ' +
             patientData?.lastname
             }}</mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
-        <mat-card-content>
-          <h3>Zipcode : 232323</h3>
-          <h3>Mobile Number : 9876899087</h3>
+        <mat-card-content style="margin: 10px 0;">
+          <h3 *ngIf="patientData?.zipcode">Zipcode: {{patientData?.zipcode}}</h3>
+          <h3>Mobile Number: {{patientData?.mobile}}</h3>
+          <h3>Create Date: {{patientData?.created_date}}</h3>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary"><a>Show Details</a></button>
+        <mat-divider />
+        <mat-card-actions style="text-align: right;">
+          <a mat-button color="primary" routerLink="/patient-details/{{patientData?.patient_id}}">Show Details</a>
         </mat-card-actions>
       </mat-card>
       <!-- } -->
     </div>
+    }@else{
+    <div>No Data Found</div>
+    }
   </div>
 </div>
