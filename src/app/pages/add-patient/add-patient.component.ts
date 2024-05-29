@@ -7,6 +7,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { PatientService } from '../../services/patient.service';
+import { VALID_RESPONSE } from '../../constants/constants';
 
 @Component({
   selector: 'app-add-patient',
@@ -69,25 +70,35 @@ export class AddPatientComponent {
         zipcode: String(this.addPatientForm.value.zipcode)?.trim(),
       };
 
-      this.patientSerive.addPatient(body).subscribe((result: any) => {
-        if (result?.data) {
-          localStorage.setItem(
-            'patientData',
-            JSON.stringify({ patient_id: result?.data.patient_id })
-          );
-          this.router.navigate(['/']);
-          this.toast.success({
-            detail: 'SUCCESS',
-            summary: 'Patient added successfully',
-            duration: 3000,
-          });
-        } else {
+      this.patientSerive.addPatient(body).subscribe({
+        next: (result: any) => {
+          if (result && result.status_code === VALID_RESPONSE) {
+            localStorage.setItem(
+              'patientData',
+              JSON.stringify({ patient_id: result.data?.patient_id })
+            );
+            this.router.navigate(['/']);
+            this.toast.success({
+              detail: 'SUCCESS',
+              summary: result.status_message,
+              duration: 3000,
+            });
+          } else {
+            this.toast.error({
+              detail: 'ERROR',
+              summary: result?.status_message,
+              duration: 3000,
+            });
+          }
+        },
+        error: (err) => {
           this.toast.error({
             detail: 'ERROR',
-            summary: result?.status_message,
+            summary: err.message,
             duration: 3000,
           });
-        }
+          console.log(err);
+        },
       });
     }
   }

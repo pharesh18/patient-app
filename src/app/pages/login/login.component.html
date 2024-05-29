@@ -8,7 +8,7 @@
         required />
       @if (loginForm.get('email')?.hasError('required')) {
       <mat-error>Email is required</mat-error>
-      }@else if(loginForm.get('email')?.hasError('email')){
+      }@else if(loginForm.get('email')?.hasError('pattern')){
       <mat-error>Please enter valid email</mat-error>
       }
     </mat-form-field>

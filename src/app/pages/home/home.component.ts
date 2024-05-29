@@ -7,6 +7,8 @@ import { RouterLink } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { VALID_RESPONSE } from '../../constants/constants';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class HomeComponent {
   patientData: any;
   loading: boolean = true;
-  constructor(private patientService: PatientService) {}
+  constructor(
+    private patientService: PatientService,
+    private toast: NgToastService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -41,21 +46,30 @@ export class HomeComponent {
     const patientData = localStorage.getItem('patientData'); // get patientData from localstorage
     if (patientData) {
       const patient_id = JSON.parse(patientData).patient_id;
-      this.patientService
-        .getPatientById(patient_id)
-        .subscribe((result: any) => {
-          if (result?.data && result?.data.length > 0) {
+      this.patientService.getPatientById(patient_id).subscribe({
+        next: (result: any) => {
+          if (
+            result.status_code === VALID_RESPONSE &&
+            result?.data &&
+            result?.data.length > 0
+          ) {
             this.patientData = {
               ...result.data[0],
               created_date: result?.datetime?.split(' ')[0],
             };
           }
           this.loading = false;
-
-          // setTimeout(() => {
-          //   this.loading = false;
-          // }, 5000);     // Uncomment this code and comment above line to see loader working
-        });
+        },
+        error: (err) => {
+          this.loading = false;
+          this.toast.error({
+            detail: 'ERROR',
+            summary: err.message,
+            duration: 3000,
+          });
+          console.log(err);
+        },
+      });
     } else {
       this.loading = false;
     }

@@ -42,7 +42,15 @@ export class LoginComponent {
    */
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(
+          /^[a-z][a-z0-9]*(.[a-z0-9]+)*@[a-z0-9]+(\.[a-z0-9]+)*\.[a-z]{2,}$/
+        ),
+      ],
+    ],
     password: [
       '',
       [Validators.required, Validators.minLength(6), Validators.maxLength(16)],
@@ -50,7 +58,9 @@ export class LoginComponent {
   });
 
   handleLogin(): void {
-    const { email, password } = this.loginForm?.value;
+    const email = this.loginForm.value.email?.trim();
+    const password = this.loginForm.value.password?.trim();
+
     if (email === 'haresh@gmail.com' && password === '123456') {
       localStorage.setItem('userData', JSON.stringify({ email, password }));
       this.router.navigate(['/']);
