@@ -1,5 +1,6 @@
 .add-patient {
-  min-height: 100vh;
+  min-height: 100%;
+  /* border: 1px solid red; */
   padding-top: 5%;
 }
 

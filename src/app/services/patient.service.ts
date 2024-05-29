@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { IPatient } from '../types/patientTypes';
 
 // CONFIDENTIAL VARIABLES ARE CONFIGURED HERE
-const BASE_URL = '';
-const API_KEY = '';
+const BASE_URL = 'https://dev-api.evitalrx.in/v1';
+const API_KEY = 'dwkoortGX8DVYzLP559sGJeWty4wX0de';
 
 @Injectable({
   providedIn: 'root',

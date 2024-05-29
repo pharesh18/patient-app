@@ -1,5 +1,10 @@
 .header {
   height: 65px;
+  border-bottom: 1px solid transparent;
+}
+
+.mat-toolbar {
+  height: 100%;
 }
 
 .menu-icon {
