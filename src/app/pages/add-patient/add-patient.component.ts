@@ -91,7 +91,7 @@ export class AddPatientComponent {
             });
           }
         },
-        error: (err) => {
+        error: (err: any) => {
           this.toast.error({
             detail: 'ERROR',
             summary: err.message,

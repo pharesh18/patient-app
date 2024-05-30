@@ -48,7 +48,7 @@ export class PatientDetailsComponent {
           }
           this.loading = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           this.loading = false;
           this.toast.error({
             detail: 'ERROR',
