@@ -52,7 +52,7 @@ export class PatientDetailsComponent {
           this.loading = false;
           this.toast.error({
             detail: 'ERROR',
-            summary: err.message,
+            summary: 'Something went wrong, Please try again!',
             duration: 3000,
           });
           console.log(err);

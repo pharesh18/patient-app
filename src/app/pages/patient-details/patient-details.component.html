@@ -2,12 +2,14 @@
   <h1>Patient Details</h1>
   @if(loading){
   <mat-spinner />
-  }@else{
+  }@else if(patientData){
   <div>
     <h2>Name: {{patientData?.firstname + ' ' + patientData?.lastname}}</h2>
     <h2>Mobile Number: {{patientData?.mobile}}</h2>
     <h2 *ngIf="patientData?.zipcode">Zipcode: {{patientData?.zipcode}}</h2>
     <h2>Created Date: {{patientData?.created_date}}</h2>
   </div>
+  }@else {
+  <div>No Data Found</div>
   }
 </div>
